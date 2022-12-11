@@ -3,6 +3,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         FileReader reader = new FileReader("input.txt");
+        FileWriter writer = new FileWriter("output.txt");
         BufferedReader bufferedReader = new BufferedReader(reader);
         String line = bufferedReader.readLine();
         double a = 0.0;
@@ -16,7 +17,7 @@ public class Main {
                 try {
                     a = Double.valueOf(num);
                 }catch(NumberFormatException e) {
-                    System.out.print("Error! Not number\n");
+                    writer.write("Error! Not number\n");
                     is = false;
                     break;
                 }
@@ -25,7 +26,7 @@ public class Main {
                 try {
                     b = Double.valueOf(num);
                 }catch(NumberFormatException e) {
-                    System.out.print("Error! Not number\n");
+                    writer.write("Error! Not number\n");
                     is = false;
                     break;
                 }
@@ -39,7 +40,7 @@ public class Main {
                     try {
                         znak = result(num,znak);
                     }catch(Exception s){
-                        System.out.print("Operation Error!");
+                        writer.write("Operation Error!\n");
                         is=false;
                         break;
                     }
@@ -48,15 +49,15 @@ public class Main {
         }
         if(is) {
             switch(znak){
-                case('+'): System.out.print(a + b);
+                case('+'): writer.write(String.valueOf(a + b));
                     break;
-                case('-'): System.out.print(a - b);
+                case('-'): writer.write(String.valueOf(a - b));
                     break;
                 case('/'):
-                    if(b==0.0) System.out.print("Error! Division by zero");
-                    else	 System.out.print(a / b);
+                    if(b==0.0) writer.write("Operation Error!\n");
+                    else	 writer.write(String.valueOf(a / b));
                     break;
-                case('*'): System.out.print(a * b);
+                case('*'): writer.write(String.valueOf(a * b));
                     break;
             }
         }
